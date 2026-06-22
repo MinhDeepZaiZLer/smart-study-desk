@@ -1,0 +1,4 @@
+# Tránh commit file chạy trên PC
+*.exe
+*.o
+.vscode/
