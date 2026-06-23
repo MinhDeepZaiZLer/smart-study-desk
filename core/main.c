@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdint.h>
+#include "data_types.h"
 
 // Hàm giả lập đọc cảm biến Nhiệt độ bằng cách ghi trực tiếp vào vùng nhớ qua con trỏ
 void Mock_Read_Temperature(float *p_temp) {
@@ -23,15 +24,24 @@ void Mock_Read_Light(uint16_t *p_light) {
     
     *p_light = 200 + (rand() % 601); // 200 đến 800 Lux
 }
+void Update_Desk_Sensors(StudyDesk_t *desk) {
+    if (desk == NULL) return; 
 
+    Mock_Read_Temperature(&(desk->env.temperature));
+    Mock_Read_Humidity(&(desk->env.humidity));
+    Mock_Read_Light(&(desk->env.light_level));
+
+
+}
 int main() {
     // Khởi tạo bộ sinh số ngẫu nhiên dựa trên thời gian thực
     srand(time(NULL));
+    StudyDesk_t myDesk;
+   
 
-    // Khởi tạo các biến lưu trữ cục bộ
-    float current_temperature = 0.0f;
-    float current_humidity = 0.0f;
-    uint16_t current_light_level = 0;
+    myDesk.env.temperature = 0.0f;
+    myDesk.env.humidity = 0.0f;
+    myDesk.env.light_level = 0;
 
     printf("===========================================\n");
     printf("   SMART STUDY DESK - INITIALIZATION       \n");
@@ -42,14 +52,12 @@ int main() {
         printf("[Sample %d] Reading sensors...\n", i);
 
       
-        Mock_Read_Temperature(&current_temperature);
-        Mock_Read_Humidity(&current_humidity);
-        Mock_Read_Light(&current_light_level);
+        Update_Desk_Sensors(&myDesk);
 
        
-        printf(" -> Temperature: %.2f *C\n", current_temperature);
-        printf(" -> Humidity   : %.2f %%\n", current_humidity);
-        printf(" -> Light Level: %u Lux\n", current_light_level);
+        printf(" -> Temperature: %.2f *C\n", myDesk.env.temperature);
+        printf(" -> Humidity   : %.2f %%\n", myDesk.env.humidity);
+        printf(" -> Light Level: %u Lux\n", myDesk.env.light_level);
         printf("-------------------------------------------\n");
     }
 
