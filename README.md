@@ -14,3 +14,4 @@ An IoT device built on TivaC Launchpad that monitors the study environment, trac
 
 ## 📅 Daily Changelog
 - **Day 1:** Initialize repository, structure setup, and pointer-based sensor mockup.
+- **Day 2:** Implement nested struct Environment_t and sensor update wrapper function
