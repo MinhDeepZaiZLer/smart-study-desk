@@ -20,3 +20,5 @@ An IoT device built on TivaC Launchpad that monitors the study environment, trac
 - **Day 2:**
   - Implement nested struct `Environment_t` and sensor update wrapper function.
   - Implement Pomodoro Finite State Machine (FSM) core logic.
+- **Day 3:**
+  - Integrate Pomodoro FSM with real-time Focus Score algorithm
